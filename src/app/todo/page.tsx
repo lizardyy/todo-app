@@ -4,31 +4,19 @@ import prisma from "@/lib/prisma";
 import AddTodo from "./addTodo";
 import DeleteTodo from "./deleteTodo";
 import EditTodo from "./editTodo";
+import { fetchTodoItems } from "../api/todo/route";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const dynamic = "force-dynamic";
 
-const getTodoItems = async () => {
-	const res = await prisma.todoItems.findMany({
-		select: {
-			id: true,
-			title: true,
-			description: true,
-			status: true,
-		},
-		orderBy: {
-			id: "asc", // 'asc' for ascending order, 'desc' for descending order
-		},
-	});
-	return res;
-};
+
 
 export default async function Todo() {
-	const [todoItems] = await Promise.all([getTodoItems()]);
+	const [todoItems] = await Promise.all([fetchTodoItems()]);
 
 	return (
-		<main className={`min-h-screen  p-24 ${inter.className}`}>
+		<main className={`min-h-screen p-2 md:p-24 ${inter.className}`}>
 			<div>
 				<h1 className="text-4xl font-bold text-center text-gray-800 mb-6">
 					To Do List
@@ -38,13 +26,13 @@ export default async function Todo() {
 			</div>
 
 			<div>
-				<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+				<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-fixed">
 					<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 						<tr>
 							<th scope="col" className="px-6 py-3 w-1/4">
 								Title
 							</th>
-							<th scope="col" className="px-6 py-3 w-1/3">
+							<th scope="col" className="px-6 py-3 w-1/3 hidden md:table-cell">
 								Description
 							</th>
 							<th scope="col" className="px-6 py-3 w-1/6">
@@ -61,8 +49,10 @@ export default async function Todo() {
 								key={index}
 								className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
 							>
-								<td className="px-6 py-4">{todoItem.title}</td>
-								<td className="px-6 py-4 ">{todoItem.description}</td>
+								<td className="px-6 py-4 truncate">{todoItem.title}</td>
+								<td className="px-6 py-4 truncate hidden md:table-cell">
+									{todoItem.description}
+								</td>
 								<td
 									className={`px-6 py-4 ${
 										todoItem.status === "new"

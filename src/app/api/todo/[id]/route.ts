@@ -4,6 +4,7 @@ import { todoItems } from "@prisma/client";
 
 // PUT /api/post
 // Required fields in body: title, description, and status
+// Update todoItems
 export const PUT = async (
 	request: Request,
 	{ params }: { params: { id: string } }
@@ -22,6 +23,7 @@ export const PUT = async (
 	return NextResponse.json(todoItem, { status: 200 });
 };
 
+// Delete todoItems
 export const DELETE = async (
 	request: Request,
 	{ params }: { params: { id: string } }

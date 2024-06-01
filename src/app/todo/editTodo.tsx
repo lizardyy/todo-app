@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { todoItems } from "@prisma/client";
 import axios from "axios";
+import { stat } from "fs";
 
 const EditTodo = ({ todoItem }: { todoItem: todoItems }) => {
 	const [title, setTitle] = useState(todoItem.title);
@@ -97,25 +98,14 @@ const EditTodo = ({ todoItem }: { todoItem: todoItems }) => {
 								<select
 									name="status"
 									id="status"
+									defaultValue = {status}
 									onChange={(e) => setStatus(e.target.value)}
 									className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 								>
-									<option value="new" selected={status == "new"}>
-										new
-									</option>
-									<option
-										value="in progress"
-										selected={status == "in progress"}
-									>
-										{" "}
-										in progress
-									</option>
-									<option value="done" selected={status == "done"}>
-										done
-									</option>
-									<option value="canceled" selected={status == "canceled"}>
-										canceled
-									</option>
+									<option value="new">new</option>
+									<option value="in progress">in progress</option>
+									<option value="done">done</option>
+									<option value="canceled">canceled</option>
 								</select>
 							</div>
 						</div>
