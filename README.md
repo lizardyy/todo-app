@@ -70,5 +70,5 @@ npm run start
 
 ## Deployment
 Deployment using vercell in this link 
-- https://todo-app-opal-beta-63.vercel.app/ or
-- https://todo-gm8ab62gd-mahesa-lizardys-projects.vercel.app
+- https://todo-app-opal-beta-63.vercel.app/todo or
+- https://todo-gm8ab62gd-mahesa-lizardys-projects.vercel.app/todo
