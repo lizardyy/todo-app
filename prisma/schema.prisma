@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+
+}
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model todoItems {
+  id          String  @id @default(uuid())
+  title       String  @db.VarChar(255)
+  description String  @db.Text
+  status      String  @default("pending") @db.VarChar(50)
+}
