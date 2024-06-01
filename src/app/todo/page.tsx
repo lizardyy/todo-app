@@ -62,7 +62,7 @@ export default async function Todo() {
 					<tbody className="divide-y divide-gray-200">
 						{todoItems?.map((todoItem, index) => (
 							<tr
-								key={index}
+								key={todoItem.id}
 								className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
 							>
 								<td className="px-6 py-4 truncate">{todoItem.title}</td>
