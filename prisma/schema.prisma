@@ -11,5 +11,7 @@ model todoItems {
   id          Int     @id @default(autoincrement())
   title       String  @db.VarChar(255)
   description String  @db.Text
-  status      String  @default("pending") @db.VarChar(50)
+  status      String  @default("new") @db.VarChar(50)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

@@ -65,15 +65,21 @@ export default async function Todo() {
 								<td className="px-6 py-4 ">{todoItem.description}</td>
 								<td
 									className={`px-6 py-4 ${
-										todoItem.status === "done"
+										todoItem.status === "new"
+											? "text-blue-600"
+											: todoItem.status === "in progress"
+											? "text-yellow-600"
+											: todoItem.status === "done"
 											? "text-green-600"
+											: todoItem.status === "canceled"
+											? "text-gray-600"
 											: "text-red-600"
 									}`}
 								>
 									{todoItem.status}
 								</td>
 								<td className="px-6 py-4">
-									<EditTodo todoItem={todoItem}/>
+									<EditTodo todoItem={todoItem} />
 									<DeleteTodo todoItem={todoItem} />
 								</td>
 							</tr>
