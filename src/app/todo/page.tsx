@@ -4,19 +4,35 @@ import prisma from "@/lib/prisma";
 import AddTodo from "./addTodo";
 import DeleteTodo from "./deleteTodo";
 import EditTodo from "./editTodo";
-import { fetchTodoItems } from "../api/todo/route";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const dynamic = "force-dynamic";
 
 
+// Read all todo item 
+const fetchTodoItems = async () => {
+	const res = await prisma.todoItems.findMany({
+		select: {
+			id: true,
+			title: true,
+			description: true,
+			status: true,
+			createdAt: true,
+			updatedAt: true,
+		},
+		orderBy: {
+			id: "asc",
+		},
+	});
+	return res;
+};
 
 export default async function Todo() {
 	const [todoItems] = await Promise.all([fetchTodoItems()]);
 
 	return (
-		<main className={`min-h-screen p-2 md:p-24 ${inter.className}`}>
+		<main className={`min-h-screen p-5 md:p-24 ${inter.className}`}>
 			<div>
 				<h1 className="text-4xl font-bold text-center text-gray-800 mb-6">
 					To Do List

@@ -17,20 +17,3 @@ export const POST = async (request: Request) => {
 	return NextResponse.json(todoItems, { status: 201 });
 };
 
-// Read all todo item 
-export const fetchTodoItems = async () => {
-	const res = await prisma.todoItems.findMany({
-		select: {
-			id: true,
-			title: true,
-			description: true,
-			status: true,
-			createdAt: true,
-			updatedAt: true,
-		},
-		orderBy: {
-			id: "asc",
-		},
-	});
-	return res;
-};
