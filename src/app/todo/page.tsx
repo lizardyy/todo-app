@@ -1,16 +1,26 @@
 
-import { SyntheticEvent } from "react";
 import { Inter } from "next/font/google";
-import type { todoItems } from "@prisma/client";
 import prisma from "@/lib/prisma";
 import AddTodo from "./addTodo";
+import DeleteTodo from "./deleteTodo";
+import EditTodo from "./editTodo";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const dynamic = "force-dynamic";
 
-
 const getTodoItems = async () => {
-	const res = await prisma.todoItems.findMany();
+	const res = await prisma.todoItems.findMany({
+		select: {
+			id: true,
+			title: true,
+			description: true,
+			status: true,
+		},
+		orderBy: {
+			id: "asc", // 'asc' for ascending order, 'desc' for descending order
+		},
+	});
 	return res;
 };
 
@@ -52,7 +62,7 @@ export default async function Todo() {
 								className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
 							>
 								<td className="px-6 py-4">{todoItem.title}</td>
-								<td className="px-6 py-4">{todoItem.description}</td>
+								<td className="px-6 py-4 ">{todoItem.description}</td>
 								<td
 									className={`px-6 py-4 ${
 										todoItem.status === "done"
@@ -63,20 +73,8 @@ export default async function Todo() {
 									{todoItem.status}
 								</td>
 								<td className="px-6 py-4">
-									<button
-										data-modal-hide="default-modal"
-										type="button"
-										className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-									>
-										Edit
-									</button>
-									<button
-										data-modal-hide="default-modal"
-										type="button"
-										className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 mx-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-									>
-										Delete
-									</button>
+									<EditTodo todoItem={todoItem}/>
+									<DeleteTodo todoItem={todoItem} />
 								</td>
 							</tr>
 						))}
