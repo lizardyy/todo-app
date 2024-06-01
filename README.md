@@ -30,11 +30,15 @@ Simple todo list app
 ```shell
 npm install
 ```
-- Configure your database by creating **.env** file in the root directory containing
+- Configure your database by creating `.env` file in the root directory containing
 ```
 POSTGRES_URL = [your_url_database]
 ```
-
+- push the database schema using command
+```shell
+npx prisma generate
+npx prisma db push
+```
 ### File Structure
 
 ```
@@ -67,6 +71,7 @@ or build
 npm run build
 npm run start
 ```
+open `http://localhost:[port]/todo` in browser
 
 ## Deployment
 Deployment using vercell in this link 
