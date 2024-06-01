@@ -3,7 +3,10 @@ import { SyntheticEvent } from "react";
 import { Inter } from "next/font/google";
 import type { todoItems } from "@prisma/client";
 import prisma from "@/lib/prisma";
+import AddTodo from "./addTodo";
 const inter = Inter({ subsets: ["latin"] });
+
+export const dynamic = "force-dynamic";
 
 
 const getTodoItems = async () => {
@@ -20,14 +23,8 @@ export default async function Todo() {
 				<h1 className="text-4xl font-bold text-center text-gray-800 mb-6">
 					To Do List
 				</h1>
-				<div className="flex justify-center mb-6">
-					<button
-						// onClick=
-						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 text-base font-medium rounded-lg  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-					>
-						Add To Do Item
-					</button>
-				</div>
+				{/* Add TODO */}
+				<AddTodo />
 			</div>
 
 			<div>
