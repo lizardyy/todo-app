@@ -30,7 +30,7 @@ Simple todo list app
 ```shell
 npm install
 ```
-- Configure your database by creating `.env` file in the root directory containing
+- Configure your database by creating **.env** file in the root directory containing
 ```
 POSTGRES_URL = [your_url_database]
 ```
@@ -71,9 +71,12 @@ or build
 npm run build
 npm run start
 ```
-open `http://localhost:[port]/todo` in browser
 
 ## Deployment
-Deployment using vercell in this link 
+For deployment, I am using Vercel, and the PostgreSQL database is also hosted on Vercel. Deployment is done using Vercel at this link
 - https://todo-app-opal-beta-63.vercel.app/todo or
 - https://todo-gm8ab62gd-mahesa-lizardys-projects.vercel.app/todo
+
+
+## Reference
+- [How to Build a Fullstack App with Next.js, Prisma, and Vercel Postgres](https://vercel.com/guides/nextjs-prisma-postgres)
